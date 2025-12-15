@@ -1,2 +1,12 @@
-package com.brian.foodapp.auth_users.dtos;public class LoginResponse {
+package com.brian.foodapp.auth_users.dtos;
+
+import lombok.Data;
+import java.util.List;
+
+@Data
+public class LoginResponse {
+
+    private String token;
+    private List<String> roles;
+
 }

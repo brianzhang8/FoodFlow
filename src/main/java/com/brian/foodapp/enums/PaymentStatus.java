@@ -1,2 +1,9 @@
-package com.brian.foodapp.enums;public enum PaymentStatus {
+package com.brian.foodapp.enums;
+
+public enum PaymentStatus {
+    PENDING,
+    PROCESSING,
+    COMPLETED,
+    FAILED,
+    REFUNDED
 }

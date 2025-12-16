@@ -1,12 +1,16 @@
 package com.brian.foodapp.auth_users.entity;
 
+import com.brian.foodapp.cart.entity.Cart;
+import com.brian.foodapp.order.entity.Order;
+import com.brian.foodapp.payment.entity.Payment;
+import com.brian.foodapp.review.entity.Review;
+import com.brian.foodapp.role.entity.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.List;
 

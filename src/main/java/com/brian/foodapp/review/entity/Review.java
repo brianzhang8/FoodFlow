@@ -33,7 +33,6 @@ public class Review {
 
     private LocalDateTime createdAt;
 
-    @Column(name = "order_id")
     private Long orderId;
 
     @ManyToOne

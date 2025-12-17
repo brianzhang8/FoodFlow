@@ -3,6 +3,7 @@ package com.brian.foodapp.order.entity;
 import com.brian.foodapp.auth_users.entity.User;
 import com.brian.foodapp.enums.OrderStatus;
 import com.brian.foodapp.enums.PaymentStatus;
+import com.brian.foodapp.payment.entity.Payment;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

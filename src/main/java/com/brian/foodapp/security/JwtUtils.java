@@ -29,7 +29,6 @@ public class JwtUtils {
     public void init() {
         byte[] keyBytes = secretJwtString.getBytes(StandardCharsets.UTF_8);
         this.secretKey = new SecretKeySpec(keyBytes, "HmacSHA256");
-
     }
 
     public String generateToken(String email) {
@@ -43,7 +42,10 @@ public class JwtUtils {
 
     public String getUerNameFromToken(String token) {
         return extractClaims(token, Claims::getSubject);
+    }
 
+    private boolean isTokenExpired(String token) {
+        return extractClaims(token, Claims::getExpiration).before(new Date());
     }
 
     private <T> T extractClaims(String token, Function<Claims, T> claimsTFunction) {
@@ -56,7 +58,5 @@ public class JwtUtils {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
-    private boolean isTokenExpired(String token) {
-        return extractClaims(token, Claims::getExpiration).before(new Date());
-    }
+
 }

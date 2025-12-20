@@ -1,10 +1,10 @@
 package com.brian.foodapp.review.repository;
 
-import com.stripe.model.Review;
+
+import com.brian.foodapp.review.entity.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {

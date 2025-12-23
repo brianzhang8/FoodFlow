@@ -31,7 +31,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotBlank(message = "password is required")
+    @NotBlank(message = "Password is required")
     private String password;
 
     private String phoneNumber;

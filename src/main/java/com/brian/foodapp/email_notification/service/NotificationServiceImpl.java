@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
 import java.nio.charset.StandardCharsets;
 
 @Service
@@ -26,7 +25,7 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     @Async
     public void sendEmail(NotificationDTO notificationDTO) {
-        log.info("Inside sendEmail()");
+        log.info("Inside sendEmail()"); //tell us this function is invoking
         try{
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(
@@ -53,6 +52,7 @@ public class NotificationServiceImpl implements NotificationService {
             log.info("Notification saved to table successfully");
 
         }catch (Exception e){
+            log.error("Failed to send email", e);
             throw new RuntimeException(e.getMessage());
         }
     }

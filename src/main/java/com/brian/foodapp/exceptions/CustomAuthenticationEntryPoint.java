@@ -24,7 +24,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
         Response<?> errorResponse = Response.builder()
                 .statusCode(HttpStatus.UNAUTHORIZED.value()) //401 error
-                .message(authException.getMessage())
+                .message("Authentication required. Please login first.")
                 .build();
 
         response.setContentType("application/json");

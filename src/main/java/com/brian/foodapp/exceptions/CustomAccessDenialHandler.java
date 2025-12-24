@@ -26,7 +26,7 @@ public class CustomAccessDenialHandler implements AccessDeniedHandler {
 
         Response<?> errorResponse = Response.builder()
                 .statusCode(HttpStatus.FORBIDDEN.value()) //403 error
-                .message(accessDeniedException.getMessage())
+                .message("You do not have permission to access this resource")
                 .build();
 
         response.setContentType("application/json");

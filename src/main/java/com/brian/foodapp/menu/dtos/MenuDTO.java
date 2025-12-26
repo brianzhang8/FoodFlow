@@ -34,7 +34,7 @@ public class MenuDTO {
     private String imageUrl;
 
     @NotNull(message = "Category ID is required")
-    private Category category;
+    private Long categoryId;
 
     private MultipartFile imageFile;
 

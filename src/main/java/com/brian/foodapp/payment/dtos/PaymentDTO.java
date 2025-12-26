@@ -28,7 +28,7 @@ public class PaymentDTO {
 
     private PaymentGateway paymentGateway;
 
-    private String failureReasons;
+    private String failureReason;
 
     private boolean success;
 

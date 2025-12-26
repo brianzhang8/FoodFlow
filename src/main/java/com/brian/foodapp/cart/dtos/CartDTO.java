@@ -10,11 +10,15 @@ import java.util.List;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CartDTO {
+public class CartDTO { // request+response dto
 
     private Long id;
+
     private List<CartItemDTO> cartItems;
-    private Long menuId;
+
+    private Long menuId; // add item to cart
+
     private int quantity;
+
     private BigDecimal totalAmount;
 }

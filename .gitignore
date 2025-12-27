@@ -1,11 +1,11 @@
 ########################
-# OS / 通用垃圾文件
+# OS 
 ########################
 .DS_Store
 Thumbs.db
 
 ########################
-# IDE / 编辑器
+# IDE 
 ########################
 .idea/
 .vscode/
@@ -41,16 +41,6 @@ backend/.settings/
 backend/logs/
 backend/*.log
 
-# 后端环境变量 / 密钥
-backend/.env
-backend/application-local.yml
-backend/application-dev.yml
-
-########################
-# ===== 安全相关（强烈建议） =====
-########################
-*.key
-*.pem
-*.jks
-*.keystore
+# backend 
+backend/src/main/resources/application-local.properties
 

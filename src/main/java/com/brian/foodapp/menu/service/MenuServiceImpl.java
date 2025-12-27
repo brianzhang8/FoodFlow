@@ -22,7 +22,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -47,13 +46,16 @@ public class MenuServiceImpl implements MenuService{
         Category category = categoryRepository.findById(menuDTO.getCategoryId())
                 .orElseThrow(() -> new NotFoundException("Category not found"));
 
+        // for image
         String imageUrl;
-
         MultipartFile imageFile = menuDTO.getImageFile();
 
+        // if not provide image
         if (imageFile == null || imageFile.isEmpty()) {
             throw new BadRequestException("Menu Image is required");
         }
+
+        // upload the image if provide
         String imageName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
         URL s3Uel = awss3Service.uploadFile("menus/" + imageName, imageFile);
         imageUrl = s3Uel.toString();
@@ -85,9 +87,11 @@ public class MenuServiceImpl implements MenuService{
         Category category = categoryRepository.findById(menuDTO.getCategoryId())
                 .orElseThrow(() -> new NotFoundException("Category not found"));
 
+        // for image
         String imageUrl = existingMenu.getImageUrl();
         MultipartFile imageFile = menuDTO.getImageFile();
 
+        // if provide image
         if(imageFile != null && !imageFile.isEmpty()) {
             // delete old image in cloud if it exists
             if(imageUrl != null && !imageUrl.isEmpty()) {
@@ -96,7 +100,7 @@ public class MenuServiceImpl implements MenuService{
                 log.info("Deleted old menu image from s3");
             }
             // upload new image
-            String imageName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+            String imageName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
             URL newImageUrl = awss3Service.uploadFile("menus/" + imageName, imageFile);
             imageUrl = newImageUrl.toString();
         }
@@ -107,12 +111,12 @@ public class MenuServiceImpl implements MenuService{
         existingMenu.setImageUrl(imageUrl);
         existingMenu.setCategory(category);
 
-        Menu updatedMenu = menuRepository.save(existingMenu);
+        Menu savedMenu = menuRepository.save(existingMenu);
 
         return Response.<MenuDTO>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("Menu updated successfully")
-                .data(modelMapper.map(updatedMenu, MenuDTO.class))
+                .data(modelMapper.map(savedMenu, MenuDTO.class))
                 .build();
     }
 
@@ -138,7 +142,7 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public Response<?> deleteMenu(Long id) {
+    public Response<?> deleteMenuById(Long id) {
         log.info("Inside deleteMenu()");
 
         Menu existingMenu = menuRepository.findById(id)
@@ -159,7 +163,7 @@ public class MenuServiceImpl implements MenuService{
     }
 
     @Override
-    public Response<List<MenuDTO>> getMenus(Long categoryId, String search) {
+    public Response<List<MenuDTO>> getAllMenus(Long categoryId, String search) {
         log.info("Inside getMenus()");
 
         Specification<Menu> spec = buildSpecification(categoryId, search);
@@ -173,7 +177,7 @@ public class MenuServiceImpl implements MenuService{
 
         return Response.<List<MenuDTO>>builder()
                 .statusCode(HttpStatus.OK.value())
-                .message("Menus retrieved")
+                .message("Menus retrieved successfully")
                 .data(menuDTOS)
                 .build();
     }

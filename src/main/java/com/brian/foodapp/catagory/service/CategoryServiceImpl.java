@@ -27,23 +27,25 @@ public class CategoryServiceImpl implements CategoryService {
         log.info("Inside addCategory()");
 
         Category category = modelMapper.map(categoryDTO, Category.class);
-        categoryRepository.save(category);
+        Category savedCategory = categoryRepository.save(category);
 
         return Response.<CategoryDTO>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("Category added successfully")
-                .data(modelMapper.map(category, CategoryDTO.class))
+                .data(modelMapper.map(savedCategory, CategoryDTO.class))
                 .build();
     }
 
     @Override
     public Response<CategoryDTO> updateCategory(CategoryDTO categoryDTO) {
         log.info("Inside updateCategory()");
+
         Category category = categoryRepository.findById(categoryDTO.getId())
                 .orElseThrow(() -> new NotFoundException("Category not found"));
 
         if(categoryDTO.getName() != null && !categoryDTO.getName().isEmpty()) category.setName(categoryDTO.getName());
         if(categoryDTO.getDescription() != null && !categoryDTO.getDescription().isEmpty()) category.setDescription(categoryDTO.getDescription());
+
         categoryRepository.save(category);
 
         return Response.<CategoryDTO>builder()
@@ -60,12 +62,10 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Category not found"));
 
-        CategoryDTO categoryDTO = modelMapper.map(category, CategoryDTO.class);
-
         return Response.<CategoryDTO>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("Category retrieved successfully")
-                .data(categoryDTO)
+                .data(modelMapper.map(category, CategoryDTO.class))
                 .build();
     }
 
@@ -87,8 +87,10 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Response<?> deleteCategory(Long id) {
+    public Response<?> deleteCategoryById(Long id) {
         log.info("Inside deleteCategory()");
+
+        // if not existed
         if(!categoryRepository.existsById(id)) {
             throw new NotFoundException("Category not found");
         }

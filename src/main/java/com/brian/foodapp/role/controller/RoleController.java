@@ -28,14 +28,13 @@ public class RoleController {
         return ResponseEntity.ok(roleService.updateRole(roleDTO));
     }
 
-
     @GetMapping
-    public ResponseEntity<Response<List<RoleDTO>>> createRole() {
+    public ResponseEntity<Response<List<RoleDTO>>> getAllRoles() {
         return ResponseEntity.ok(roleService.getAllRoles());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response<?>> updateRole(@PathVariable Long id) {
-        return ResponseEntity.ok(roleService.deleteRole(id));
+    public ResponseEntity<Response<?>> deleteRoleById(@PathVariable Long id) {
+        return ResponseEntity.ok(roleService.deleteRoleById(id));
     }
 }

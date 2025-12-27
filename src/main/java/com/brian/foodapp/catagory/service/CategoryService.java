@@ -14,5 +14,5 @@ public interface CategoryService {
 
     Response<List<CategoryDTO>> getAllCategories();
 
-    Response<?> deleteCategory(Long id);
+    Response<?> deleteCategoryById(Long id);
 }

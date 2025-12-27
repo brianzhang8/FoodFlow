@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
 @RestController
@@ -46,16 +45,16 @@ public class MenuController {
         return ResponseEntity.ok(menuService.getMenuById(id));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Response<?>> deleteMenu(@PathVariable Long id){
-        return ResponseEntity.ok(menuService.deleteMenu(id));
+    public ResponseEntity<Response<?>> deleteMenuById(@PathVariable Long id){
+        return ResponseEntity.ok(menuService.deleteMenuById(id));
     }
 
     @GetMapping
     public ResponseEntity<Response<List<MenuDTO>>> getAllMenus(
             @RequestParam(required = false) Long categoryId,
             @RequestParam(required = false) String search) {
-        return ResponseEntity.ok(menuService.getMenus(categoryId, search));
+        return ResponseEntity.ok(menuService.getAllMenus(categoryId, search));
     }
 }

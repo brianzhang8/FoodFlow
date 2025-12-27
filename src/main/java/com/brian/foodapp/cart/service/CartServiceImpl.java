@@ -36,6 +36,7 @@ public class CartServiceImpl implements CartService{
     private final ModelMapper modelMapper;
 
 
+    // Add a specified quantity of a Menu to the currently logged-in user's shopping cart.
     @Override
     public Response<?> addItemToCart(CartDTO cartDTO) {
         log.info("Inside addItemToCart()");
@@ -98,6 +99,7 @@ public class CartServiceImpl implements CartService{
         Cart cart = cartRepository.findByUserId(user.getId())
                 .orElseThrow(() -> new NotFoundException("Cart not found"));
 
+        // check if the item is already in the cart
         CartItem cartItem = cart.getCartItems().stream()
                 .filter(item -> item.getMenu().getId().equals(menuId))
                 .findFirst().orElseThrow(() -> new NotFoundException("Menu not found in cart"));
@@ -123,6 +125,7 @@ public class CartServiceImpl implements CartService{
         Cart cart = cartRepository.findByUserId(user.getId())
                 .orElseThrow(() -> new NotFoundException("Cart not found"));
 
+        // check if the item is already in the cart
         CartItem cartItem = cart.getCartItems().stream()
                 .filter(item -> item.getMenu().getId().equals(menuId))
                 .findFirst().orElseThrow(() -> new NotFoundException("Menu not found in cart"));

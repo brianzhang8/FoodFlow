@@ -26,11 +26,8 @@ import java.util.List;
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     private final JwtUtils jwtUtils;
 
     @Override
@@ -106,6 +103,7 @@ public class AuthServiceImpl implements AuthService {
         List<String> roleNames = user.getRoles().stream()
                 .map(Role::getName)
                 .toList();
+
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setToken(token);
         loginResponse.setRoles(roleNames);

@@ -6,7 +6,6 @@ import com.brian.foodapp.auth_users.repository.UserRepository;
 import com.brian.foodapp.aws.AWSS3Service;
 import com.brian.foodapp.email_notification.dtos.NotificationDTO;
 import com.brian.foodapp.email_notification.service.NotificationService;
-import com.brian.foodapp.exceptions.BadRequestException;
 import com.brian.foodapp.exceptions.NotFoundException;
 import com.brian.foodapp.response.Response;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import java.net.URL;
 import java.util.List;
@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Response<List<UserDTO>> getAllUsers() {
         log.info("Inside getAllUsers()");
+
         List<User> users = userRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
         List<UserDTO> userDTOS = modelMapper.map(users, new TypeToken<List<UserDTO>>() {}.getType());
@@ -58,12 +59,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Response<UserDTO> getOwnAccountDetail() {
         log.info("Inside getOwnAccountDetail()");
+
         User user = getCurrentLoggedInUser();
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
 
         return Response.<UserDTO>builder()
                 .statusCode(HttpStatus.OK.value())
-                .message("Retrieving account detail successfully")
+                .message("Retrieving own account detail successfully")
                 .data(userDTO)
                 .build();
     }
@@ -74,6 +76,7 @@ public class UserServiceImpl implements UserService {
 
         // fetch current logged in user
         User user = getCurrentLoggedInUser();
+
         String profileUrl = user.getProfileUrl();
         MultipartFile imageFile = userDTO.getImageFile();
 
@@ -86,7 +89,7 @@ public class UserServiceImpl implements UserService {
                 log.info("Deleted old profile image from s3");
             }
             // upload new image
-            String imageName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+            String imageName = UUID.randomUUID() + "_" + imageFile.getOriginalFilename();
             URL newImageUrl = awsS3Service.uploadFile("profile/" + imageName, imageFile);
             user.setProfileUrl(newImageUrl.toString());
         }
@@ -94,15 +97,7 @@ public class UserServiceImpl implements UserService {
         if(userDTO.getName() != null) user.setName(userDTO.getName());
         if(userDTO.getPhoneNumber() != null) user.setPhoneNumber(userDTO.getPhoneNumber());
         if(userDTO.getAddress() != null) user.setAddress(userDTO.getAddress());
-        if (userDTO.getPassword() != null) user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-
-        if (userDTO.getEmail() != null && !userDTO.getEmail().equals(user.getEmail())){
-            // check if the new email is already taken
-            if(userRepository.existsByEmail(userDTO.getEmail())) {
-                throw new BadRequestException("Email already exists");
-            }
-            user.setEmail(userDTO.getEmail());
-        }
+        if (StringUtils.hasText(userDTO.getPassword())) user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
         // save the user
         userRepository.save(user);

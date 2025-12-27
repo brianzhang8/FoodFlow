@@ -3,7 +3,6 @@ package com.brian.foodapp.cart.dtos;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -18,7 +17,7 @@ public class CartDTO { // request+response dto
 
     private Long menuId; // add item to cart
 
-    private int quantity;
+    private int quantity; // how many will add
 
     private BigDecimal totalAmount;
 }

@@ -31,6 +31,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
@@ -57,7 +58,7 @@ public class OrderServiceImpl implements OrderService{
     @Value("${base.payment.link}")
     private String basePaymentLink;
 
-
+    @Transactional
     @Override
     public Response<?> placeOrderFromCart() {
         log.info("Inside placeOrderFromCart()");
@@ -121,12 +122,10 @@ public class OrderServiceImpl implements OrderService{
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Order not found"));
 
-        OrderDTO orderDTO = modelMapper.map(order, OrderDTO.class);
-
         return Response.<OrderDTO>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("Order retrieved successfully")
-                .data(orderDTO)
+                .data(modelMapper.map(order, OrderDTO.class))
                 .build();
     }
 

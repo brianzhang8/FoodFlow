@@ -14,7 +14,7 @@ public class CategoryDTO {
     @NotNull(message = "Category id must not be null")
     private Long id;
 
-    @NotBlank(message = "A name is required")
+    @NotBlank(message = "Category name is required")
     private String name;
 
     private String description;

@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -24,24 +23,34 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Response<RoleDTO> createRole(RoleDTO roleDTO) {
+        log.info("Inside createRole()");
+
+        if (roleRepository.findByName(roleDTO.getName()).isPresent()) {
+            throw new BadRequestException("Role name already exists");
+        }
+
         Role role = modelMapper.map(roleDTO, Role.class);
         Role savedRole = roleRepository.save(role);
 
         return Response.<RoleDTO>builder()
                 .statusCode(HttpStatus.OK.value())
-                .message("Role crated successfully")
-                .data(modelMapper.map(savedRole,RoleDTO.class))
+                .message("Role created successfully")
+                .data(modelMapper.map(savedRole, RoleDTO.class))
                 .build();
     }
 
     @Override
     public Response<RoleDTO> updateRole(RoleDTO roleDTO) {
+        log.info("Inside updateRole()");
+
         Role existingRole = roleRepository.findById(roleDTO.getId())
                 .orElseThrow(() -> new NotFoundException("Role not found"));
 
+        // role name is already existed
         if (roleRepository.findByName(roleDTO.getName()).isPresent()) {
             throw new BadRequestException("Role name already exists");
         }
+        // only update the role name not role id
         existingRole.setName(roleDTO.getName());
         Role updatedRole = roleRepository.save(existingRole);
 
@@ -54,20 +63,26 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Response<List<RoleDTO>> getAllRoles() {
+        log.info("Inside getAllRoles()");
+
         List<Role> roles = roleRepository.findAll();
+
+        // convert roles to roleDTOs
         List<RoleDTO> roleDTOs = roles.stream()
                 .map(role -> modelMapper.map(role, RoleDTO.class))
                 .toList();
 
         return Response.<List<RoleDTO>>builder()
                 .statusCode(HttpStatus.OK.value())
-                .message("Role retrieved successfully")
+                .message("Roles retrieved successfully")
                 .data(roleDTOs)
                 .build();
     }
 
     @Override
-    public Response<?> deleteRole(Long id) {
+    public Response<?> deleteRoleById(Long id) {
+        log.info("Inside deleteRoleById()");
+
         if(!roleRepository.existsById(id)) {
             throw new NotFoundException("Role does not exists");
         }

@@ -6,7 +6,6 @@ import com.brian.foodapp.payment.entity.Payment;
 import com.brian.foodapp.review.entity.Review;
 import com.brian.foodapp.role.entity.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +30,6 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @NotBlank(message = "Password is required")
     private String password;
 
     private String phoneNumber;

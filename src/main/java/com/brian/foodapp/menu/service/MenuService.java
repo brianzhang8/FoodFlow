@@ -12,7 +12,7 @@ public interface MenuService {
 
     Response<MenuDTO> getMenuById(Long id);
 
-    Response<?> deleteMenu(Long id);
+    Response<?> deleteMenuById(Long id);
 
-    Response<List<MenuDTO>> getMenus(Long categoryId, String search);
+    Response<List<MenuDTO>> getAllMenus(Long categoryId, String search);
 }

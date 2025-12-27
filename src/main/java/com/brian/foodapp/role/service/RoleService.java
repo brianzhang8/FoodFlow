@@ -12,5 +12,5 @@ public interface RoleService {
 
     Response<List<RoleDTO>> getAllRoles();
 
-    Response<?> deleteRole(Long id);
+    Response<?> deleteRoleById(Long id);
 }

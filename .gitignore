@@ -1,0 +1,56 @@
+########################
+# OS / 通用垃圾文件
+########################
+.DS_Store
+Thumbs.db
+
+########################
+# IDE / 编辑器
+########################
+.idea/
+.vscode/
+*.iml
+
+########################
+# Logs
+########################
+*.log
+
+########################
+# ===== Frontend (React) =====
+########################
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+
+# 前端环境变量
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local
+
+########################
+# ===== Backend (Spring Boot) =====
+########################
+backend/target/
+backend/.classpath
+backend/.project
+backend/.settings/
+
+# Spring Boot 日志 / 运行文件
+backend/logs/
+backend/*.log
+
+# 后端环境变量 / 密钥
+backend/.env
+backend/application-local.yml
+backend/application-dev.yml
+
+########################
+# ===== 安全相关（强烈建议） =====
+########################
+*.key
+*.pem
+*.jks
+*.keystore
+

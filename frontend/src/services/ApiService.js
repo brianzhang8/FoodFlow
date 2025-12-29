@@ -50,7 +50,7 @@ export default class ApiService {
         localStorage.removeItem("roles");
     }
 
-    static isAthenticated() {
+    static isAuthenticated() {
         const token = this.getToken();
         return !!token;
     }
@@ -66,11 +66,6 @@ export default class ApiService {
 
 
 
-
-
-    
-
-
     // REGISTER USER
     static async registerUser(registrationData) {
         const resp = await axios.post(`${this.BASE_URL}/auth/register`, registrationData);
@@ -83,13 +78,6 @@ export default class ApiService {
         const resp = await axios.post(`${this.BASE_URL}/auth/login`, loginData);
         return resp.data;
     }
-
-
-
-
-
-
-
 
 
 
@@ -442,10 +430,4 @@ export default class ApiService {
         });
         return resp.data;
     }
-
-
-
-
-
-
 }

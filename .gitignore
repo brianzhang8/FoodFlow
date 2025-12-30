@@ -1,46 +1,74 @@
 ########################
-# OS 
+# OS (macOS / Windows)
 ########################
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
 Thumbs.db
 
 ########################
-# IDE 
+# IDE - IntelliJ IDEA
 ########################
 .idea/
-.vscode/
 *.iml
+*.ipr
+*.iws
+out/
+
+########################
+# IDE - VS Code
+########################
+.vscode/
+.history/
 
 ########################
 # Logs
 ########################
 *.log
+logs/
+**/logs/
 
 ########################
 # ===== Frontend (React) =====
 ########################
+# Node dependencies
 frontend/node_modules/
-frontend/dist/
-frontend/build/
 
-# 前端环境变量
+# Build outputs
+frontend/build/
+frontend/dist/
+
+# Env files (DO NOT COMMIT)
 frontend/.env
-frontend/.env.local
-frontend/.env.development.local
-frontend/.env.production.local
+frontend/.env.*
+!frontend/.env.example
 
 ########################
 # ===== Backend (Spring Boot) =====
 ########################
+# Maven / Gradle
 backend/target/
+
+# Eclipse (if ever opened)
 backend/.classpath
 backend/.project
 backend/.settings/
 
-# Spring Boot 日志 / 运行文件
+# Spring Boot logs
 backend/logs/
 backend/*.log
 
-# backend 
+# Application config (local / secrets)
 backend/src/main/resources/application-local.properties
+backend/src/main/resources/application-*.properties
+!backend/src/main/resources/application.properties
 
+########################
+# ===== Others =====
+########################
+# Temporary files
+*.tmp
+*.swp
+*.swo

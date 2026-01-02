@@ -25,7 +25,7 @@ const RegisterPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(!formData.name || !formData.email || !formData.password || !formData.confirmPassword){
+        if(!formData.name || !formData.email || !formData.password || !formData.confirmPassword || !formData.phoneNumber || !formData.address){
             showError("Please fill in all required fields");
             return;
         }
@@ -56,7 +56,7 @@ const RegisterPage = () => {
                 });
                 navigate('/login');
             }else{
-                showError(response.message || 'Registration failed');
+                showError(response.message);
             }
         } catch (error) {
             showError(error.response?.data?.message || error.message);

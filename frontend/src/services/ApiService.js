@@ -205,13 +205,13 @@ export default class ApiService {
 
 
 
-    /* CATEGORY SECTION */
+    /* CATEGORY SECTION */  
     static async getAllCategories() {
         console.log("getAllCategories() was called")
         const resp = await axios.get(`${this.BASE_URL}/categories/all`);
         console.log("response is: " + resp.data)
         return resp.data;
-    }
+    }   
 
     static async getCategoryById(id) {
         const resp = await axios.get(`${this.BASE_URL}/categories/${id}`);
@@ -252,7 +252,7 @@ export default class ApiService {
     /* MENU SECTION */
 
     static async addMenu(formData) {
-        const resp = await axios.post(`${this.BASE_URL}/menu`, formData, {
+        const resp = await axios.post(`${this.BASE_URL}/menus`, formData, {
             headers: {
                 ...this.getHeader(),
                 'Content-Type': 'multipart/form-data'
@@ -262,7 +262,7 @@ export default class ApiService {
     }
 
     static async updateMenu(formData) {
-        const resp = await axios.put(`${this.BASE_URL}/menu`, formData, {
+        const resp = await axios.put(`${this.BASE_URL}/menus`, formData, {
             headers: {
                 ...this.getHeader(),
                 'Content-Type': 'multipart/form-data'
@@ -272,24 +272,24 @@ export default class ApiService {
     }
 
     static async deleteMenu(id) {
-        const resp = await axios.delete(`${this.BASE_URL}/menu/${id}`, {
+        const resp = await axios.delete(`${this.BASE_URL}/menus/${id}`, {
             headers: this.getHeader()
         });
         return resp.data;
     }
 
     static async getMenuById(id) {
-        const resp = await axios.get(`${this.BASE_URL}/menu/${id}`);
+        const resp = await axios.get(`${this.BASE_URL}/menus/${id}`);
         return resp.data;
     }
 
     static async getAllMenus() {
-        const resp = await axios.get(`${this.BASE_URL}/menu`, {});
+        const resp = await axios.get(`${this.BASE_URL}/menus`, {});
         return resp.data;
     }
 
     static async getAllMenuByCategoryId(categoryId) {
-        const resp = await axios.get(`${this.BASE_URL}/menu`, {
+        const resp = await axios.get(`${this.BASE_URL}/menus`, {
             params: {
                 categoryId: categoryId
             }
@@ -298,7 +298,7 @@ export default class ApiService {
     }
 
     static async searchMenu(search) {
-        const resp = await axios.get(`${this.BASE_URL}/menu`, {
+        const resp = await axios.get(`${this.BASE_URL}/menus`, {
             params: {
                 search: search
             }
@@ -318,42 +318,42 @@ export default class ApiService {
     /* CART SECTION */
     static async addItemToCart(cartDTO) {
 
-        const resp = await axios.post(`${this.BASE_URL}/cart/items`, cartDTO, {
+        const resp = await axios.post(`${this.BASE_URL}/carts/items`, cartDTO, {
             headers: this.getHeader()
         });
         return resp.data;
     }
 
     static async incrementItem(menuId) {
-        const resp = await axios.put(`${this.BASE_URL}/cart/items/increment/${menuId}`, null, {
+        const resp = await axios.put(`${this.BASE_URL}/carts/items/increment/${menuId}`, null, {
             headers: this.getHeader()
         });
         return resp.data;
     }
 
     static async decrementItem(menuId) {
-        const resp = await axios.put(`${this.BASE_URL}/cart/items/decrement/${menuId}`, null, {
+        const resp = await axios.put(`${this.BASE_URL}/carts/items/decrement/${menuId}`, null, {
             headers: this.getHeader()
         });
         return resp.data;
     }
 
     static async removeItem(cartItemId) {
-        const resp = await axios.delete(`${this.BASE_URL}/cart/items/${cartItemId}`, {
+        const resp = await axios.delete(`${this.BASE_URL}/carts/items/${cartItemId}`, {
             headers: this.getHeader()
         });
         return resp.data;
     }
 
     static async getCart() {
-        const resp = await axios.get(`${this.BASE_URL}/cart`, {
+        const resp = await axios.get(`${this.BASE_URL}/carts`, {
             headers: this.getHeader()
         });
         return resp.data;
     }
 
     static async clearCart() {
-        const resp = await axios.delete(`${this.BASE_URL}/api/cart`, {
+        const resp = await axios.delete(`${this.BASE_URL}/carts`, {
             headers: this.getHeader()
         });
         return resp.data;

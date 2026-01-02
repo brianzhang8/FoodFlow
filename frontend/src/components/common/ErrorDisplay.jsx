@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+
+// ErrorDisplay component
 const ErrorDisplay = ({ message, onDismiss }) => {
     
     
@@ -24,6 +26,7 @@ const ErrorDisplay = ({ message, onDismiss }) => {
     );
 }
 
+// Custom hook to manage error display
 export const useError = () => {
     const [errorMessage, setErrorMessage] = useState(null);
 

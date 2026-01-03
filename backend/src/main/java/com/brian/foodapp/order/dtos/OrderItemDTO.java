@@ -23,5 +23,5 @@ public class OrderItemDTO {
 
     private BigDecimal pricePerUnit;
 
-    private BigDecimal subTotal;
+    private BigDecimal subtotal;
 }

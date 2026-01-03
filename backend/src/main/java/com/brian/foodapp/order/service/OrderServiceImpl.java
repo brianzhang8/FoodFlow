@@ -158,7 +158,9 @@ public class OrderServiceImpl implements OrderService{
         log.info("Inside getOrderOfUser()");
 
         User customer = userService.getCurrentLoggedInUser();
+
         List<Order> orders = orderRepository.findByUserOrderByOrderDateDesc(customer);
+
 
         List<OrderDTO> orderDTOS = orders.stream()
                 .map(order -> modelMapper.map(order, OrderDTO.class))
@@ -168,6 +170,7 @@ public class OrderServiceImpl implements OrderService{
             orderItem.setUser(null);
             orderItem.getOrderItems().forEach(item -> item.getMenu().setReviews(null));
         });
+
         return Response.<List<OrderDTO>>builder()
                 .statusCode(HttpStatus.OK.value())
                 .message("Orders for user retrieved successfully")
@@ -244,10 +247,11 @@ public class OrderServiceImpl implements OrderService{
 
         // build the order items HTML using StringBuilder
         StringBuilder orderItemsHtml = new StringBuilder();
-        for(OrderItem item : orderDTO.getOrderItems()) {
+
+        for(OrderItemDTO item : orderDTO.getOrderItems()) {
             orderItemsHtml.append("<div class=\"order-item\">")
                     .append("<p>").append(item.getMenu().getName()).append(" x").append(item.getQuantity()).append("</p>")
-                    .append("<p> $").append(item.getSubTotal()).append("</p>")
+                    .append("<p> $").append(item.getSubtotal()).append("</p>")
                     .append("</div>");
 
         }

@@ -59,6 +59,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         Long orderId = paymentRequest.getOrderId();
 
+        log.info(orderId.toString());
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new NotFoundException("Order not found"));
 

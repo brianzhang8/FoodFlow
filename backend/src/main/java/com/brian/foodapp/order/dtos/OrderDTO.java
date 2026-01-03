@@ -4,7 +4,6 @@ package com.brian.foodapp.order.dtos;
 import com.brian.foodapp.auth_users.dtos.UserDTO;
 import com.brian.foodapp.enums.OrderStatus;
 import com.brian.foodapp.enums.PaymentStatus;
-import com.brian.foodapp.order.entity.OrderItem;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -30,5 +29,5 @@ public class OrderDTO {
 
     private UserDTO user;
 
-    private List<OrderItem> orderItems;
+    private List<OrderItemDTO> orderItems;
 }

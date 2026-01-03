@@ -208,9 +208,7 @@ export default class ApiService {
 
     /* CATEGORY SECTION */  
     static async getAllCategories() {
-        console.log("getAllCategories() was called")
         const resp = await axios.get(`${this.BASE_URL}/categories/all`);
-        console.log("response is: " + resp.data)
         return resp.data;
     }   
 

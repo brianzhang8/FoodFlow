@@ -203,7 +203,7 @@ public class OrderServiceImpl implements OrderService{
         Order order = orderRepository.findById(orderDTO.getId())
                 .orElseThrow(() -> new NotFoundException("Order not found"));
 
-        OrderStatus orderStatus = order.getOrderStatus();
+        OrderStatus orderStatus = orderDTO.getOrderStatus();
         order.setOrderStatus(orderStatus);
 
         Order savedOrder = orderRepository.save(order);

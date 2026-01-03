@@ -187,7 +187,10 @@ public class MenuServiceImpl implements MenuService{
             List<Predicate> predicates = new ArrayList<>();
 
             if(categoryId != null) {
-                predicates.add(cb.equal(root.get("category"), categoryId));
+                predicates.add(cb.equal(
+                        root.get("category").get("id"), // Navigate to category->id
+                        categoryId                      // Match provided category ID
+                ));
             }
             if(search != null && !search.isBlank()) {
                 String searchTerm = "%" + search.toLowerCase() + "%";

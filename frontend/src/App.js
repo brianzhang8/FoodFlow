@@ -1,3 +1,4 @@
+import { Navigate } from "react-router";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/common/Navbar";
 import Footer from "./components/common/Footer";
@@ -25,10 +26,10 @@ import AdminPaymentDetailPage from "./components/admin/AdminPaymentDetailPage";
 import AdminDashboardPage from "./components/admin/AdminDashboarPage";
 import AdminUserRegistration from "./components/auth/AdminUserRegistration";
 
+
 function App() {
   return ( 
     <BrowserRouter>
-    {/* Your app components go here */}
     <Navbar />
     <div className="content">
       <Routes>
@@ -75,6 +76,8 @@ function App() {
             <Route path="register" element={<AdminUserRegistration />} />
           </Route>
         </Route>
+        {/* Redirect unknown routes to home */}
+        <Route path="*" element={<Navigate to={"/home"} />} />
       </Routes>
 
     </div>

@@ -11,7 +11,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CategoryDTO {
 
-    @NotNull(message = "Category id must not be null")
+
     private Long id;
 
     @NotBlank(message = "Category name is required")

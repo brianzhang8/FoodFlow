@@ -2,7 +2,8 @@ import axios from "axios";
 
 export default class ApiService {
 
-    static BASE_URL = "http://localhost:8080/api";
+    //static BASE_URL = "http://localhost:8080/api";
+    static BASE_URL = "http://3.16.112.211:8080/api"; //AWS EC2 INSTANCE URL
 
     static saveToken(token) {
         localStorage.setItem("token", token);

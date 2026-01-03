@@ -25,6 +25,7 @@ import AdminPaymentsPage from "./components/admin/AdminPaymentsPage";
 import AdminPaymentDetailPage from "./components/admin/AdminPaymentDetailPage";
 import AdminDashboardPage from "./components/admin/AdminDashboarPage";
 import AdminUserRegistration from "./components/auth/AdminUserRegistration";
+import LeaveReviewPage from "./components/profile_cart/LeaveReviewPage";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/update" element={<UpdateProfilePage />} />
           <Route path="/my-order-history" element={<OrderHistoryPage />} />
+          <Route path="/leave-review" element={<LeaveReviewPage />} />
           <Route path="/orders" element={<OrderHistoryPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/pay" element={<ProcessPaymentPage />} />

@@ -111,6 +111,7 @@ public class PaymentServiceImpl implements PaymentService {
         payment.setPaymentStatus(paymentDTO.isSuccess() ? PaymentStatus.COMPLETED : PaymentStatus.FAILED);
         payment.setPaymentDate(LocalDateTime.now());
         payment.setOrder(order);
+        payment.setUser(order.getUser());
 
         if(!paymentDTO.isSuccess()){
             payment.setFailureReason(paymentDTO.getFailureReason());
@@ -189,6 +190,7 @@ public class PaymentServiceImpl implements PaymentService {
        Payment payment = paymentRepository.findById(paymentId).orElseThrow(() -> new NotFoundException("Payment not found"));
 
        PaymentDTO paymentDTO = modelMapper.map(payment, PaymentDTO.class);
+       log.info(paymentDTO.toString());
 
        paymentDTO.getUser().setRoles(null);
        paymentDTO.getOrder().setUser(null);

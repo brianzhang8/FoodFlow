@@ -64,6 +64,7 @@ backend/*.log
 backend/src/main/resources/application-local.properties
 backend/src/main/resources/application-*.properties
 !backend/src/main/resources/application.properties
+backend/.env
 
 ########################
 # ===== Others =====
@@ -72,3 +73,9 @@ backend/src/main/resources/application-*.properties
 *.tmp
 *.swp
 *.swo
+
+
+# env files
+.env
+.env.*
+

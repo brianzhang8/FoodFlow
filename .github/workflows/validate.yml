@@ -18,6 +18,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-
-      - name: Build with Maven (skip tests)
-        run: mvn clean package -DskipTests
+          
+      - name: Build backend with CI profile
+        run: |
+            cd backend
+            mvn clean package -DskipTests -Dspring.profiles.active=ci

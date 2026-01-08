@@ -12,4 +12,8 @@ public class FoodAppApplication {
         SpringApplication.run(FoodAppApplication.class, args);
     }
 
+    public static String getName(){
+        return "user";
+    }
+
 }
